@@ -54,7 +54,7 @@ void print_person(Person p);
 
 
 int main() {
-	int select;
+	char select[1024];
 	// 定义电话簿
 	PersonNote note;
 	note.m_Size = 0;	// 初始人数为0
@@ -63,38 +63,44 @@ int main() {
 	{
 		begin:
 		printItems();
-		cin >> select;
-		if (select < 1 || select > 7) {
-			cout << "输入有误，请重新输入(1-7).";
-			system("cls");
-			select = 0;
+		// 每次读取之前清空读取缓冲区中的内容
+		// 这样每次读取时,上次输入的值就不会有影响
+		//cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+		//cin.clear();
+		//cin.getline(select,sizeof(select));
+		cin.get(select, sizeof(select));
+		//cout << "input val: " << select<<" ,int val: "<< ((int)select[0]) << endl;
+		if ( ((int)select[0]) < 49 || ((int)select[0]) > 55) {
+			cout << "输入有误，请重新输入(1-7)."<<endl;
+			cin.clear();
+			cin.ignore(numeric_limits<std::streamsize>::max(),'\n');
 			goto begin;
 		}
-		switch (select) {
-		case 1:		//1.添加用户
+		switch ((int)select[0]) {
+		case 49:		//1.添加用户
 			insert_person(&note);
 			break;
-		case 2:		//2.打印用户
+		case 50:		//2.打印用户
 			print_note(&note);
 			break;
-		case 3:		// 3.查找用户
+		case 51:		// 3.查找用户
 			find_person(&note);
 			break;
-		case 4:		// 4.修改用户
+		case 52:		// 4.修改用户
 			update_person(&note);
 			break;
-		case 5:		// 5.删除用户
+		case 53:		// 5.删除用户
 			delete_person(&note);
 			break;
-		case 6:		// 6.清空电话簿
+		case 54:		// 6.清空电话簿
 			clear_note(&note);
 			break;
-		case 7:		// 7. 退出
+		case 55:		// 7. 退出
 			cout << "谢谢使用,期待您的下次光临." << endl;
 			clsScreen();
 			return 0;
 		default:
-			cout << "输入有误，请重新输入." << endl;
+			cout << "switch输入有误，请重新输入." << endl;
 			clsScreen();
 			break;
 		}
@@ -106,6 +112,7 @@ int main() {
 void insert_person(PersonNote *note) {
 	struct Person p;
 	cout << "请输入姓名: " << endl;
+	cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 	cin >> p.m_Name;
 
 	cout << "请输入年龄: " << endl;
@@ -115,7 +122,9 @@ void insert_person(PersonNote *note) {
 			break;
 		}
 		else {
-			cout << "输入不太对哦，请重新输入(1-200)" << endl;
+			cout << "年龄输入不太对哦，请重新输入(1-200)" << endl;
+			cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+			cin.clear();
 		}
 	}
 
@@ -127,7 +136,9 @@ void insert_person(PersonNote *note) {
 			break;
 		}
 		else {
-			cout << "输入不太对哦，请重新输入.1 -> 男    2->女" << endl;
+			cout << "性别输入不太对哦，请重新输入.1 -> 男    2->女" << endl;
+			cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+			cin.clear();
 		}
 	}
 
@@ -203,6 +214,7 @@ void update_person(PersonNote *note) {
 	}
 	string name;
 	cout << "请输入要更新的用户的姓名: " << endl;
+	cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 	cin >> name;
 	int ret = if_exists(note, name);
 	if (ret >= 0) {
@@ -217,7 +229,9 @@ void update_person(PersonNote *note) {
 				break;
 			}
 			else {
-				cout << "输入的不正确哦,请重新输入: (0-200)" << endl;
+				cout << "年龄输入的不正确哦,请重新输入: (0-200)" << endl;
+				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+				cin.clear();
 			}
 		}
 
@@ -228,7 +242,9 @@ void update_person(PersonNote *note) {
 				break;
 			}
 			else {
-				cout << "输入的不正确哦,请重新输入: (1 ->  男,  2 -> 女)" << endl;
+				cout << "性别输入的不正确哦,请重新输入: (1 ->  男,  2 -> 女)" << endl;
+				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+				cin.clear();
 			}
 		}
 

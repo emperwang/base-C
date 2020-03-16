@@ -60,3 +60,10 @@ dkms.conf
 *.dev
 *.layout
 *.win
+
+#c++ visio studio
+*.sdf
+*.sln
+*.vs
+*.vcxproj
+*.filters

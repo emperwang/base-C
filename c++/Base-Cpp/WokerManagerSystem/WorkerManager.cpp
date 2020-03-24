@@ -231,7 +231,7 @@ void workerManager::deleteEmsInfo() {
 			int i = idx;
 			delete this->worksArr[idx];
 			for (; i < this->curWorkCount; i++) {
-				this->worksArr[i] == this->worksArr[i++];
+				this->worksArr[i] = this->worksArr[i++];
 			}
 			this->curWorkCount--;
 			this->save();

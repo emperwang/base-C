@@ -54,6 +54,39 @@
     <ClCompile Include="mapDemo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="pred_one.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="function_obj.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pred_two.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="for_each_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="transform-demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="find_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="find_if_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="adjacent_find_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="binary_search_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="count_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="count_if_demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globalTemplateFriend.hpp">

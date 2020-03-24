@@ -77,9 +77,9 @@ void test_map_sort() {
 	}
 }
 
-int main() {
-	test_map_sort();
-
-	system("pause");
-	return 0;
-}
+//int main() {
+//	test_map_sort();
+//
+//	system("pause");
+//	return 0;
+//}

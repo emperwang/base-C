@@ -71,11 +71,11 @@ void test_count_if_cus_type() {
 	cout << " 大于35的人数: " << num << endl;
 }
 
-int main() {
-	test_count_if_interval();
-	test_count_if_cus_type();
-
-	system("pause");
-
-	return 0;
-}
+//int main() {
+//	test_count_if_interval();
+//	test_count_if_cus_type();
+//
+//	system("pause");
+//
+//	return 0;
+//}

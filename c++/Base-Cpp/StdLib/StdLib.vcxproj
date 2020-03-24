@@ -133,28 +133,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="accumulate_demo.cpp" />
     <ClCompile Include="adjacent_find_demo.cpp" />
     <ClCompile Include="binary_search_demo.cpp" />
     <ClCompile Include="classConstructor.cpp" />
     <ClCompile Include="classConstructor.h" />
+    <ClCompile Include="copy_demo.cpp" />
     <ClCompile Include="count_demo.cpp" />
     <ClCompile Include="count_if_demo.cpp" />
     <ClCompile Include="dequeDemo.cpp" />
+    <ClCompile Include="fill_demo.cpp" />
     <ClCompile Include="find_demo.cpp" />
     <ClCompile Include="find_if_demo.cpp" />
     <ClCompile Include="for_each_demo.cpp" />
     <ClCompile Include="listDemo.cpp" />
     <ClCompile Include="mapDemo.cpp" />
+    <ClCompile Include="merge_demo.cpp" />
     <ClCompile Include="pairDemo.cpp" />
     <ClCompile Include="pred_one.cpp" />
     <ClCompile Include="function_obj.cpp" />
     <ClCompile Include="pred_two.cpp" />
     <ClCompile Include="queueDemo.cpp" />
+    <ClCompile Include="random_shufle_demo.cpp" />
+    <ClCompile Include="replace_demo.cpp" />
+    <ClCompile Include="replace_if_demo.cpp" />
+    <ClCompile Include="reverse_demo.cpp" />
     <ClCompile Include="setDemo.cpp" />
+    <ClCompile Include="set_difference_demo.cpp" />
+    <ClCompile Include="set_intersection_demo.cpp" />
+    <ClCompile Include="set_union_demo.cpp" />
+    <ClCompile Include="sort_demo.cpp" />
     <ClCompile Include="stackDemo.cpp" />
     <ClCompile Include="StarterApp.cpp" />
     <ClCompile Include="stringDemo.cpp" />
     <ClCompile Include="sumPractise.cpp" />
+    <ClCompile Include="swap_demo.cpp" />
     <ClCompile Include="transform-demo.cpp" />
     <ClCompile Include="vectorDemo.cpp" />
   </ItemGroup>

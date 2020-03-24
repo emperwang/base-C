@@ -62,12 +62,12 @@ dkms.conf
 *.win
 
 #c++ visio studio
-*.sdf
-*.sln
+*#.sdf
+#*.sln
 *.vs
-*.vcxproj
-*.filters
-*.opensdf
+#*.vcxproj
+#*.filters
+#*.opensdf
 bin
 temp
 Debug

@@ -19,7 +19,7 @@ public:
 	void validOrder();
 
 	// 老师添加
-	static void addTeacher();
+	void addTeacher();
 
 	// 老师编号
 	string t_id;

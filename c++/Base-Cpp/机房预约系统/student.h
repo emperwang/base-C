@@ -26,7 +26,7 @@ public:
 	void cancelOrder();
 
 	// 学生添加
-	static void addStudent();
+	void addStudent();
 
 	// 学生编号
 	string s_id;

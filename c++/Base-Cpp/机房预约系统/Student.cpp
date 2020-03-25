@@ -35,12 +35,12 @@ void student::addStudent() {
 	string name;
 	string pwd;
 	string sid;
+	cout << "请输入学生编号:" << endl;
+	cin >> sid;
 	cout << "请输入学生姓名 :" << endl;
 	cin >> name;
 	cout << "请输入学生密码: " << endl;
 	cin >> pwd;
-	cout << "请输入学生编号:" << endl;
-	cin >> sid;
 	ofstream ofs;
 	ofs.open(STUDENT_FILE, ios::out | ios::app);
 	ofs << name << " " << pwd << " " << sid << " " << endl;

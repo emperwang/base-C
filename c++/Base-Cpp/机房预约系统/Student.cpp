@@ -5,7 +5,9 @@ student::student() {
 }
 
 student::student(string name, string pwd, string id) {
-
+	this->m_name = name;
+	this->m_pwd = pwd;
+	this->s_id = id;
 }
 
 // ²Ù×÷²Ëµ¥

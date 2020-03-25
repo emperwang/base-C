@@ -133,6 +133,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="speakerManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AppStarter.cpp" />
+    <ClCompile Include="speaker.h" />
+    <ClCompile Include="speakerManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

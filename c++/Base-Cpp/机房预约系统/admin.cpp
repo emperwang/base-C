@@ -96,8 +96,7 @@ void admin::cleanOrder() {
 
 
 void printStu(student &st) {
-	cout << "学生姓名:" << st.m_name << "\t pwd=" <<
-		"\t登录密码: ***" << "\t学生ID=" << st.s_id << endl;
+	cout << "学生姓名:" << st.m_name << "\t pwd:***" << "\t学生ID:" << st.s_id << endl;
 }
 
 void admin::printStudent() {
@@ -105,8 +104,7 @@ void admin::printStudent() {
 }
 
 void printTea(teacher &st) {
-	cout << "老师姓名:" << st.m_name << "\t pwd=" <<
-		"\t登录密码: ***" << "\t老师ID=" << st.t_id << endl;
+	cout << "老师姓名:" << st.m_name << "\t pwd: ***" << "\t老师ID:" << st.t_id << endl;
 }
 
 void admin::printTeacher() {

@@ -25,9 +25,6 @@ public:
 	// 取消订阅
 	void cancelOrder();
 
-	// 学生添加
-	void addStudent();
-
 	// 学生编号
 	string s_id;
 };

@@ -36,6 +36,12 @@ public:
 
 	// 加载学生以及老师的数据
 	void loadRecords();
+	// 学生添加
+	void addStudent();
+	// 老师添加
+	void addTeacher();
+
+	bool checkRepeat(int role, string id);
 
 	// 打印 老师 或学生信息
 	void printTeacher();

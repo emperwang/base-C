@@ -18,9 +18,6 @@ public:
 	// 审核
 	void validOrder();
 
-	// 老师添加
-	void addTeacher();
-
 	// 老师编号
 	string t_id;
 };

@@ -21,6 +21,50 @@ void admin::operMenu() {
 	cout << "---------------------------" << endl;
 	cout << "请选择要进行的操作:" << endl;
 }
+void admin::addStudent() {
+	string name;
+	string pwd;
+	string sid;
+	cout << "请输入学生编号:" << endl;
+	cin >> sid;
+	while (this->checkRepeat(studentRole, sid)) {
+		cout << "学生编号 " << sid << " 已经存在，请重新输入." << endl;
+		cin >> sid;
+	}
+	cout << "请输入学生姓名 :" << endl;
+	cin >> name;
+	cout << "请输入学生密码: " << endl;
+	cin >> pwd;
+	ofstream ofs;
+	ofs.open(STUDENT_FILE, ios::out | ios::app);
+	ofs << name << " " << pwd << " " << sid << " " << endl;
+	ofs.close();
+
+	// 新添加后，重新加载数据
+	this->loadRecords();
+}
+
+void admin::addTeacher() {
+	string name;
+	string pwd;
+	string sid;
+	cout << "请输入老师编号:" << endl;
+	cin >> sid;
+	while (this->checkRepeat(teacherRole, sid)) {
+		cout << "老师编号 " << sid << " 已经存在，请重新输入." << endl;
+		cin >> sid;
+	}
+	cout << "请输入老师姓名 :" << endl;
+	cin >> name;
+	cout << "请输入老师密码: " << endl;
+	cin >> pwd;
+	ofstream ofs;
+	ofs.open(TEACHER_FILE, ios::out | ios::app);
+	ofs << name << " " << pwd << " " << sid << " " << endl;
+	ofs.close();
+
+	this->loadRecords();
+}
 // 添加账号
 void admin::addPerson() {
 	cout << "添加用户" << endl;
@@ -36,12 +80,12 @@ void admin::addPerson() {
 		switch (sel) {
 		case 1:	// 同学
 		{	
-			student().addStudent();
+			addStudent();
 			return;
 		}
 		case 2:	// 老师
 		{
-			teacher().addTeacher();
+			addTeacher();
 			return;
 		}
 		case 3:	// 管理员
@@ -58,7 +102,24 @@ void admin::addPerson() {
 	}
 
 }
-
+bool admin::checkRepeat(int role, string id) {
+	if (role == studentRole) {
+		for (vector<student>::iterator it = this->studs.begin(); it != this->studs.end(); it++) {
+			if (id == it->s_id) {	//atoi(sid.c_str)  // string 转换为 int
+				return true;
+			}
+		}
+		return false;
+	}
+	else if (role == teacherRole) {
+		for (vector<teacher>::iterator it = this->teachs.begin(); it != this->teachs.end(); it++) {
+			if (id == it->t_id) {	//atoi(sid.c_str)  // string 转换为 int
+				return true;
+			}
+		}
+		return false;
+	}
+}
 // 查看账号
 void admin::showPerson() {
 	cout << "展示用户" << endl;
@@ -112,6 +173,8 @@ void admin::printTeacher() {
 }
 
 void admin::loadRecords() {
+	this->studs.clear();
+	this->teachs.clear();
 	ifstream ifs,ifs1;
 	ifs.open(STUDENT_FILE, ios::in);
 	if (ifs.is_open()) {

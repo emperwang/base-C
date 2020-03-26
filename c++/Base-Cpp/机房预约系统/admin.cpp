@@ -165,8 +165,6 @@ void admin::loadComputerInfo() {
 	else {
 		cout << "暂无可用的机房..." << endl;
 	}
-	system("pause");
-	system("cls");
 	ifs.close();
 }
 
@@ -175,8 +173,6 @@ void admin::showComputer() {
 	cout << "展示机房信息" << endl;
 	// 展示机房信息
 	for_each(this->coms.begin(), this->coms.end(), printComputer);
-	system("pause");
-	system("cls");
 }
 
 // 清空预约记录

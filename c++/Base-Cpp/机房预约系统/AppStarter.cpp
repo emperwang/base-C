@@ -76,6 +76,8 @@ void rolelogin(string file, int role) {
 				if (readname == inputname && readpwd == inputpwd && readsid == inputsid) {
 					cout << "学生 " << inputname << " 登录成功." << endl;
 					ifs.close();
+					system("pause");
+					system("cls");
 					identy * ident = new student(readname, readpwd, readsid);
 					showStudentMenu(ident);
 					break;
@@ -101,6 +103,8 @@ void rolelogin(string file, int role) {
 				if (readname == inputname && readpwd == inputpwd && readtid == inputtid) {
 					cout << "老师 " << inputname << " 登录成功." << endl;
 					ifs.close();
+					system("pause");
+					system("cls");
 					identy *ident = new teacher(readname, readpwd, readtid);
 					showTeacerMenu(ident);
 					break;
@@ -121,9 +125,11 @@ void rolelogin(string file, int role) {
 				cin >> pwd;
 				while (ifs >> readName && ifs >> readpwd) {
 					if (readName == name && readpwd == pwd) {
-						cout << "登录成功" << endl;
-						identy *ident = new admin(name, pwd);
+						cout << "管理员: "<<readName << " 登录成功" << endl;
 						ifs.close();
+						identy *ident = new admin(name, pwd);
+						system("pause");
+						system("cls");
 						showAdminMenu(ident);
 						break;
 					}
@@ -154,12 +160,16 @@ void showStudentMenu(identy *ident) {
 		cin >> sel;
 		switch (sel) {
 		case 1:		// 申请预约
+			stu->applyOrder();
 			break;
 		case 2:		// 查看我的预约
+			stu->showMyOrder();
 			break;
 		case 3:		// 查看所有预约
+			stu->showAllOrder();
 			break;
 		case 4:		// 取消预约
+			stu->cancelOrder();
 			break;
 		case 5:		// 注销登录
 		{

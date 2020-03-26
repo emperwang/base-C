@@ -1,9 +1,11 @@
-#ifndef __STUDENT_H__
-#define __STUDENT_H__
+#pragma once
+//#ifndef _STUDENT_H
+//#define _STUDENT_H
 #include <iostream>
 #include <fstream>
 #include "identy.h"
 #include "globalFile.h"
+using namespace std;
 
 class student :public identy {
 public:
@@ -30,4 +32,4 @@ public:
 };
 
 
-#endif // !__STUDENT_H__
+//#endif // !__STUDENT_H__

@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="admin.h" />
+    <ClInclude Include="comOrder.h" />
     <ClInclude Include="computer.h" />
     <ClInclude Include="globalFile.h" />
     <ClInclude Include="identy.h" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="admin.cpp" />
     <ClCompile Include="AppStarter.cpp" />
+    <ClCompile Include="comOrder.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="Teacher.cpp" />
   </ItemGroup>

@@ -1,5 +1,6 @@
-#ifndef __ADMIN_H__
-#define __ADMIN_H__
+#pragma once
+//#ifndef __ADMIN_H__
+//#define __ADMIN_H__
 
 #include <iostream>
 #include <string>
@@ -59,4 +60,4 @@ public:
 	vector<computerRoom> coms;
 };
 
-#endif // !1
+//#endif // !1

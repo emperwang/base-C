@@ -12,7 +12,15 @@ student::student(string name, string pwd, string id) {
 
 // 操作菜单
 void student::operMenu() {
-
+	cout << "欢迎学生: " << this->m_name << " 登录." << endl;
+	cout << "---------------------------\n";
+	cout << "|1.申请预约		|\n";
+	cout << "|2.查看我的预约	|\n";
+	cout << "|3.查看所有预约	|\n";
+	cout << "|4.取消预约		|\n";
+	cout << "|5.注销登录		|\n";
+	cout << "---------------------------" << endl;
+	cout << "请选择要进行的操作:" << endl;
 }
 
 // 订阅

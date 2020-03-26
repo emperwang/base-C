@@ -7,6 +7,10 @@
 #include "admin.h"
 using namespace std;
 
+// 显示学生的菜单
+void showStudentMenu(identy *ident);
+// 显示老师的菜单
+void showTeacerMenu(identy *ident);
 //显示管理员的菜单
 void showAdminMenu(identy* &ident);
 // 主菜单的显示
@@ -20,8 +24,10 @@ int main() {
 		cin >> select;
 		switch (select) {
 		case studentRole:			// 学生登录
+			rolelogin(STUDENT_FILE, studentRole);
 			break;
 		case teacherRole:			// 老师登录
+			rolelogin(TEACHER_FILE, teacherRole);
 			break;
 		case adminRole:			// 管理员
 			rolelogin(ADMIN_FILE, adminRole);
@@ -51,10 +57,56 @@ void rolelogin(string file, int role) {
 
 	if (ifs.is_open()) {
 		switch (role) {
-		case studentRole:
+		case studentRole: {
+			string inputname;
+			string inputpwd;
+			string inputsid;
+			string readname;
+			string readpwd;
+			string readsid;
+			cout << "请输入要登录的用户名: " << endl;
+			cin >> inputname;
+			cout << "请输入要登录的用户的密码" << endl;
+			cin >> inputpwd;
+			cout << "请输入学生编号 :" << endl;
+			cin >> inputsid;
+			while (ifs >> readname && ifs >> readpwd && ifs >> readsid) {
+				if (readname == inputname && readpwd == inputpwd && readsid == inputsid) {
+					cout << "学生 " << inputname << " 登录成功." << endl;
+					ifs.close();
+					identy * ident = new student(readname, readpwd, readsid);
+					showStudentMenu(ident);
+					break;
+				}
+			}
+			cout << "账户密码错误.." << endl;
 			break;
-		case teacherRole:
+		}
+		case teacherRole: {
+			string inputname;
+			string inputpwd;
+			string inputtid;
+			string readname;
+			string readpwd;
+			string readtid;
+			cout << "请输入要登录的用户名: " << endl;
+			cin >> inputname;
+			cout << "请输入要登录的用户的密码" << endl;
+			cin >> inputpwd;
+			cout << "请输入要登录的老师编号" << endl;
+			cin >> inputtid;
+			while (ifs >> readname && ifs >> readpwd && ifs >> readtid) {
+				if (readname == inputname && readpwd == inputpwd && readtid == inputtid) {
+					cout << "老师 " << inputname << " 登录成功." << endl;
+					ifs.close();
+					identy *ident = new teacher(readname, readpwd, readtid);
+					showTeacerMenu(ident);
+					break;
+				}
+			}
+			cout << "账户密码错误.." << endl;
 			break;
+		}
 		case adminRole:
 			{
 				string name;	// 读取用户的输入 用户名 
@@ -73,6 +125,7 @@ void rolelogin(string file, int role) {
 						break;
 					}
 				}
+				cout << "账户密码错误.." << endl;
 				break;
 			}
 		default:
@@ -86,6 +139,72 @@ void rolelogin(string file, int role) {
 	}
 	ifs.close();
 
+}
+
+// 显示学生的菜单
+void showStudentMenu(identy *ident) {
+	student * stu = (student *)ident;
+	int sel = 0;
+	cin.clear();
+	while (true) {
+		stu->operMenu();
+		cin >> sel;
+		switch (sel) {
+		case 1:		// 申请预约
+			break;
+		case 2:		// 查看我的预约
+			break;
+		case 3:		// 查看所有预约
+			break;
+		case 4:		// 取消预约
+			break;
+		case 5:		// 注销登录
+		{
+			cout << "学生: " << stu->m_name << " 退出登录。 欢迎下次光临" << endl;
+			delete stu;
+			system("pause");
+			system("cls");
+			return;
+		}
+		default:
+		{
+			cout << "输入有误, 请重新输入." << endl;
+			system("pause");
+			system("cls");
+			break;
+		}
+		}
+	}
+}
+// 显示老师的菜单
+void showTeacerMenu(identy *ident) {
+	teacher *tea = (teacher *)ident;
+	int sel = 0;
+	cin.clear();
+	while (true) {
+		tea->operMenu();
+		cin >> sel;
+		switch (sel) {
+		case 1:		// 查看所有预约
+			break;
+		case 2:		// 审核预约
+			break;
+		case 3:		// 注销登录
+		{
+			cout << "老师: " << tea->m_name << " 退出登录。 欢迎下次光临" << endl;
+			delete tea;
+			system("pause");
+			system("cls");
+			return;
+			break;
+		}
+		default:
+			cout << "输入有误, 请重新输入." << endl;
+			system("pause");
+			system("cls");
+			break;
+		}
+	}
 }
 
 void showAdminMenu(identy* &ident) {

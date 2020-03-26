@@ -85,31 +85,47 @@ string getStatus(int status) {
 
 // 查看自己订阅
 void student::showMyOrder() {
-	ifstream ifs;
-	ifs.open(ORDER_FILE, ios::in);
-	if (ifs.is_open()) {
-		string romid;
-		string name;
-		string id;
-		string time;
-		string status;
-		while (ifs >> romid && ifs >> name && ifs >> id && ifs >> time && ifs >> status) {
-			if (id == this->s_id) {
-				cout << "订阅机房: " << romid << " 订阅人:" << name << "  订阅人id:" << id << " 订阅时间:" <<
-					(atoi(time.c_str()) == 1 ? "上午" : "下午") <<"  状态:"<< getStatus(atoi(status.c_str())) << endl;
-			}
+	order od;
+	for (vector<order>::iterator it = od.ods.begin(); it != od.ods.end(); it++) {
+		if (it->o_id == this->s_id) {
+			cout << "订阅机房: " << it->romid << " 订阅人:" << it->o_name 
+				<< "  订阅人id:" << it->o_id << " 订阅时间:" <<
+				(it->time == 1 ? "上午" : "下午") 
+				<<"  状态:"<< getStatus(it->status) << endl;
 		}
 	}
-	else {
-		cout << "文件不存在或为空." << endl;
-	}
-	ifs.close();
+	//ifstream ifs;
+	//ifs.open(ORDER_FILE, ios::in);
+	//if (ifs.is_open()) {
+	//	string romid;
+	//	string name;
+	//	string id;
+	//	string time;
+	//	string status;
+	//	while (ifs >> romid && ifs >> name && ifs >> id && ifs >> time && ifs >> status) {
+	//		if (id == this->s_id) {
+	//			cout << "订阅机房: " << romid << " 订阅人:" << name << "  订阅人id:" << id << " 订阅时间:" <<
+	//				(atoi(time.c_str()) == 1 ? "上午" : "下午") <<"  状态:"<< getStatus(atoi(status.c_str())) << endl;
+	//		}
+	//	}
+	//}
+	//else {
+	//	cout << "文件不存在或为空." << endl;
+	//}
+	//ifs.close();
 	system("pause");
 	system("cls");
 }
 // 查看所有订阅
 void student::showAllOrder() {
-	ifstream ifs;
+	order od;
+	for (vector<order>::iterator it = od.ods.begin(); it != od.ods.end(); it++) {
+		cout << "订阅机房: " << it->romid << " 订阅人:" << it->o_name
+			<< "  订阅人id:" << it->o_id << " 订阅时间:" <<
+			(it->time == 1 ? "上午" : "下午")
+			<< "  状态:" << getStatus(it->status) << endl;
+	}
+	/*ifstream ifs;
 	ifs.open(ORDER_FILE, ios::in);
 	if (ifs.is_open()) {
 		string romid;
@@ -125,7 +141,7 @@ void student::showAllOrder() {
 	else {
 		cout << "文件不存在或为空." << endl;
 	}
-	ifs.close();
+	ifs.close();*/
 	system("pause");
 	system("cls");
 }
@@ -135,82 +151,129 @@ void printOrder(order od) {
 }
 // 取消订阅
 void student::cancelOrder() {
-	ifstream ifs;
-	ifs.open(ORDER_FILE, ios::in);
-
-	if (!ifs.is_open()) {
-		cout << "目前没有预约." << endl;
-		ifs.close();
+	order odr;
+	if (odr.ods.size() <= 0) {
+		cout << "暂时没有预约信息." << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-	char c;
-	ifs >> c;
-
-	if (ifs.eof()) {
-		cout << "目前没有预约的信息." << endl;
-		ifs.close();
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	// 文件存在，且不为空
-	string romid;
-	string name;
-	string id;
-	string time;
-	string status;
-	ifs.putback(c);
-	vector<order> orders;
-	int idx = 1;
-	int sel = 0; // 记录输入值
-	while (ifs >> romid && ifs >> name && ifs >> id && ifs >> time && ifs >> status) {
-		if (id == this->s_id) {
-			order od(atoi(romid.c_str()), name, id, atoi(time.c_str()), atoi(status.c_str()));
-			orders.push_back(od);
+	vector<int> orIdx;	// 记录一下预约的位置
+	vector<order> toUpdate;
+	int idx = 0, outputIdx = 1;
+	for (vector<order>::iterator it = odr.ods.begin(); it != odr.ods.end(); it++) {
+		idx++;
+		if (it->status == orderPorcess && it->o_id == this->s_id) {
+			orIdx.push_back(idx);
+			toUpdate.push_back(*it);
 		}
 	}
-	ifs.close();
-	if (orders.size() <= 0) {
-		cout << "目前还没有 " << this->m_name << "  的预约信息." << endl;
+	if (orIdx.size() <= 0) {
+		cout << "目前没有待审核的预约信息." << endl;
 		system("pause");
 		system("cls");
 		return;
 	}
-
+	int sel = 0;// 接收输入的预约号
+	int result; // 接收审核的结果
 	while (true) {
-		for (vector<order>::iterator it = orders.begin(); it != orders.end(); it++) {
-			cout << idx++ << " ";
+		for (vector<order>::iterator it = toUpdate.begin(); it != toUpdate.end(); it++) {
+			cout << outputIdx << " ";
 			printOrder(*it);
 		}
-		cout << "请输入你要取消的预约:" << endl;
+		cout << "请输入要审核的预约 :" << endl;
 		cin >> sel;
-		if (sel > 0 && sel <= orders.size()) {
-			orders.at(sel - 1).status = orderCancel;
-			// cout << "修改后的值: " << endl;
-			// 重新写入文件
-			ofstream ofs;
-			ofs.open(ORDER_FILE, ios::out | ios::trunc);
-			for (vector<order>::iterator it = orders.begin(); it != orders.end(); it++) {
-				// printOrder(*it);
-
-				// // 房间号  预约人  预约人id		时间	状态
-				ofs << it->romid << " " << it->o_name << " " << it->o_id << " " << it->time << " " 
-					<< it->status << endl;
-			}
-			ofs.close();
+		if (sel > 0 && sel <= orIdx.size()) {
 			break;
 		}
 		else {
-			idx = 1;
-			cout << "输入有误，请重新输入. " << endl;
+			cout << "输入有误，请重新输入要审核的预约号." << endl;
 			system("pause");
 			system("cls");
 		}
 	}
+	odr.ods.at(orIdx.at(sel - 1) - 1).status = orderCancel;
+	odr.updateAllOrder();
+	cout << "取消成功 ." << endl;
 	system("pause");
 	system("cls");
 }
 
+/*
+取消预约
+ifstream ifs;
+ifs.open(ORDER_FILE, ios::in);
+
+if (!ifs.is_open()) {
+	cout << "目前没有预约." << endl;
+	ifs.close();
+	system("pause");
+	system("cls");
+	return;
+}
+char c;
+ifs >> c;
+
+if (ifs.eof()) {
+	cout << "目前没有预约的信息." << endl;
+	ifs.close();
+	system("pause");
+	system("cls");
+	return;
+}
+
+// 文件存在，且不为空
+string romid;
+string name;
+string id;
+string time;
+string status;
+ifs.putback(c);
+vector<order> orders;
+int idx = 1;
+int sel = 0; // 记录输入值
+while (ifs >> romid && ifs >> name && ifs >> id && ifs >> time && ifs >> status) {
+	int sta = atoi(status.c_str());
+	if (id == this->s_id && sta == orderPorcess) {
+		order od(atoi(romid.c_str()), name, id, atoi(time.c_str()), sta);
+		orders.push_back(od);
+	}
+}
+ifs.close();
+if (orders.size() <= 0) {
+	cout << "目前还没有 " << this->m_name << "  的预约信息." << endl;
+	system("pause");
+	system("cls");
+	return;
+}
+
+while (true) {
+	for (vector<order>::iterator it = orders.begin(); it != orders.end(); it++) {
+		cout << idx++ << " ";
+		printOrder(*it);
+	}
+	cout << "请输入你要取消的预约:" << endl;
+	cin >> sel;
+	if (sel > 0 && sel <= orders.size()) {
+		orders.at(sel - 1).status = orderCancel;
+		// cout << "修改后的值: " << endl;
+		// 重新写入文件
+		ofstream ofs;
+		ofs.open(ORDER_FILE, ios::out | ios::trunc);
+		for (vector<order>::iterator it = orders.begin(); it != orders.end(); it++) {
+			// printOrder(*it);
+
+			// // 房间号  预约人  预约人id		时间	状态
+			ofs << it->romid << " " << it->o_name << " " << it->o_id << " " << it->time << " "
+				<< it->status << endl;
+		}
+		ofs.close();
+		break;
+	}
+	else {
+		idx = 1;
+		cout << "输入有误，请重新输入. " << endl;
+		system("pause");
+		system("cls");
+	}
+}*/

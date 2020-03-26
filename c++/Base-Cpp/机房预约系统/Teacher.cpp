@@ -107,4 +107,5 @@ void teacher::validOrder() {
 	}
 	odr.ods.at(orIdx.at(sel - 1)-1).status = (result==1?orderReady:orderFailed);
 	odr.updateAllOrder();
+	cout << "ÉóºËÍê³É ." << endl;
 }

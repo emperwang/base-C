@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <string>
 #include "globalFile.h"
 #include "identy.h"
 using namespace std;

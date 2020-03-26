@@ -199,8 +199,10 @@ void showTeacerMenu(identy *ident) {
 		cin >> sel;
 		switch (sel) {
 		case 1:		// 查看所有预约
+			tea->showAllOrder();
 			break;
 		case 2:		// 审核预约
+			tea->validOrder();
 			break;
 		case 3:		// 注销登录
 		{

@@ -145,9 +145,31 @@ void admin::showPerson() {
 	system("cls");
 }
 
+void printComputer(computerRoom com) {
+	cout << "机房号 : " << com.room_id << "机房容量:" << com.room_cap << endl;
+}
+
 // 查看机房信息
 void admin::showComputer() {
 	cout << "展示机房信息" << endl;
+	// 加载机房信息 并展示
+	ifstream ifs;
+	ifs.open(COMPUTER_fILE, ios::in);
+	vector<computerRoom> coms;
+	if (ifs.is_open()){
+		string id;
+		string cap;
+		while (ifs >> id && ifs >> cap) {
+			coms.push_back(computerRoom(atoi(id.c_str()), atoi(cap.c_str())));
+		}
+		for_each(coms.begin(), coms.end(), printComputer);
+	}
+	else {
+		cout << "暂无可用的机房..." << endl;
+	}
+	system("pause");
+	system("cls");
+	ifs.close();
 }
 
 // 清空预约记录

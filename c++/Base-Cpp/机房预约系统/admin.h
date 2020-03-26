@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <stdlib.h>
 #include "identy.h"
 #include "student.h"
 #include "teacher.h"

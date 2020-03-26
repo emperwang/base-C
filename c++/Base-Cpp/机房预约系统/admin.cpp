@@ -1,5 +1,5 @@
 #include "admin.h"
-
+#include "comOrder.h"
 admin::admin() {
 	this->loadRecords();
 	this->loadComputerInfo();
@@ -178,6 +178,30 @@ void admin::showComputer() {
 // 清空预约记录
 void admin::cleanOrder() {
 	cout << "清除预约信息." << endl;
+	cout << "清空后数据将丢失，请确认您真的要清空预约信息吗？" << endl;
+	int sel = -1;
+	while (true) {
+		cout << "0.取消" << endl;
+		cout << "1.确认" << endl;
+		cin >> sel;
+		if (sel == 0 || sel == 1) {
+			break;
+		}
+		else {
+			cout << "输入有误，请重新输入." << endl;
+			system("pause");
+			system("cls");
+		}
+	}
+	if (sel == 1) {
+		order od;
+		od.ods.clear();
+		od.updateAllOrder();
+		cout << "情况完成" << endl;
+		system("pause");
+		system("cls");
+	}
+
 }
 
 

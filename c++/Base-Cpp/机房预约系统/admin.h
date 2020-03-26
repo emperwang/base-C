@@ -30,7 +30,7 @@ public:
 	// 查看机房信息
 	void showComputer();
 
-	// 情况预约记录
+	// 清空预约记录
 	void cleanOrder();
 
 	// 添加管理员

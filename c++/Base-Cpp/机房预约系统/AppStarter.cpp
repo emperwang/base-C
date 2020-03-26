@@ -17,6 +17,8 @@ void showAdminMenu(identy* &ident);
 void showMainMenu();
 // 用户登录 file: 要操作的文件	role 登录的角色
 void rolelogin(string file,int role);
+
+
 int main() {
 	int select = 0;
 	while (true) {
@@ -111,13 +113,14 @@ void rolelogin(string file, int role) {
 			{
 				string name;	// 读取用户的输入 用户名 
 				string pwd;		// 用户输入的密码
-				admin ma;	// 记录从文件中读取的admin用户的信息
+				string readName;
+				string readpwd;
 				cout << "请输入要登录的用户名: " << endl;
 				cin >> name;
 				cout << "请输入要登录的用户的密码" << endl;
 				cin >> pwd;
-				while (ifs >> ma.m_name && ifs >> ma.m_pwd) {
-					if (ma.m_name == name && ma.m_pwd == pwd) {
+				while (ifs >> readName && ifs >> readpwd) {
+					if (readName == name && readpwd == pwd) {
 						cout << "登录成功" << endl;
 						identy *ident = new admin(name, pwd);
 						ifs.close();

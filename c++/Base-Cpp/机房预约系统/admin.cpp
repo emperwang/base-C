@@ -2,11 +2,13 @@
 
 admin::admin() {
 	this->loadRecords();
+	this->loadComputerInfo();
 }
 admin::admin(string name, string pwd) {
 	this->m_name = name;
 	this->m_pwd = pwd;
 	this->loadRecords();
+	this->loadComputerInfo();
 }
 
 // 显示管理员菜单界面
@@ -149,20 +151,16 @@ void printComputer(computerRoom com) {
 	cout << "机房号 : " << com.room_id << "机房容量:" << com.room_cap << endl;
 }
 
-// 查看机房信息
-void admin::showComputer() {
-	cout << "展示机房信息" << endl;
-	// 加载机房信息 并展示
+void admin::loadComputerInfo() {
+	// 加载机房信息
 	ifstream ifs;
 	ifs.open(COMPUTER_fILE, ios::in);
-	vector<computerRoom> coms;
-	if (ifs.is_open()){
+	if (ifs.is_open()) {
 		string id;
 		string cap;
 		while (ifs >> id && ifs >> cap) {
-			coms.push_back(computerRoom(atoi(id.c_str()), atoi(cap.c_str())));
+			this->coms.push_back(computerRoom(atoi(id.c_str()), atoi(cap.c_str())));
 		}
-		for_each(coms.begin(), coms.end(), printComputer);
 	}
 	else {
 		cout << "暂无可用的机房..." << endl;
@@ -170,6 +168,15 @@ void admin::showComputer() {
 	system("pause");
 	system("cls");
 	ifs.close();
+}
+
+// 查看机房信息
+void admin::showComputer() {
+	cout << "展示机房信息" << endl;
+	// 展示机房信息
+	for_each(this->coms.begin(), this->coms.end(), printComputer);
+	system("pause");
+	system("cls");
 }
 
 // 清空预约记录

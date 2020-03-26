@@ -37,6 +37,10 @@ public:
 
 	// 加载学生以及老师的数据
 	void loadRecords();
+
+	// 加载机房信息
+	void loadComputerInfo();
+
 	// 学生添加
 	void addStudent();
 	// 老师添加
@@ -51,6 +55,8 @@ public:
 	// 保存老师 以及 学生的表中数据
 	vector<student> studs;
 	vector<teacher> teachs;
+	// 保存机房信息
+	vector<computerRoom> coms;
 };
 
 #endif // !1

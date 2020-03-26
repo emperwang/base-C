@@ -23,5 +23,9 @@
 #define adminRole		3
 #define logout			0
 
+// 预约时间 早上或下午
+#define morning			1
+#define afternoon		2
+
 #endif // !__GLOBALFILE_H__
 

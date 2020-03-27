@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainStarter.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="SingleList.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

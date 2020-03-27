@@ -1,5 +1,6 @@
 #include <iostream>
 #include "SingleList.h"
+#include "Queue.h"
 using namespace std;
 
 // 测试单向链表
@@ -7,6 +8,7 @@ void testSingleList();
 // 测试双向链表
 
 // 测试queue 队列
+void testQueue();
 
 // 测试栈
 
@@ -21,10 +23,24 @@ void testPoint() {
 
 int main() {
 	//testPoint();
-	testSingleList();
+	//testSingleList();
+	testQueue();
 
 	system("pause");
 	return 0;
+}
+
+void testQueue() {
+	Qlist *q = (Qlist*)malloc(sizeof(Qlist));;
+	initQueue(q);
+	enQueue(q, 10);
+	enQueue(q, 20);
+	enQueue(q, 30);
+	enQueue(q, 40);
+	cout << "outQueue:" << outQueue(q) << endl;
+	travelQueue(q);
+	reTravelQueue(q);
+	cout << "size:" << q->size << endl;
 }
 
 void testSingleList() {

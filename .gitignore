@@ -74,4 +74,4 @@ bin
 temp
 Debug
 Release
-*.txt
+#*.txt
